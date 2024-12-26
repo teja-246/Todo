@@ -1,11 +1,11 @@
-// MainPage.jsx
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const MainPage = () => {
   const tasks = [
-    { id: 1, title: 'Task 1', description: 'Description for Task 1' },
-    { id: 2, title: 'Task 2', description: 'Description for Task 2' },
-    { id: 3, title: 'Task 3', description: 'Description for Task 3' },
+    { id: 1, title: "Task 1", description: "Description for Task 1" },
+    { id: 2, title: "Task 2", description: "Description for Task 2" },
+    { id: 3, title: "Task 3", description: "Description for Task 3" },
   ];
 
   const handleView = (id) => {
@@ -52,18 +52,28 @@ const MainPage = () => {
         ))}
       </div>
       <div className="flex justify-center gap-8">
-        <button
+        <Link
+          to="/create"
           className="px-6 py-3 bg-green-500 text-white rounded-lg text-lg hover:bg-green-600"
-          onClick={() => console.log('Navigate to Create To-Do Page')}
         >
-          Create To-Do
-        </button>
-        <button
+          <button
+            className="px-6 py-3 bg-green-500 text-white rounded-lg text-lg hover:bg-green-600"
+            onClick={() => console.log("Navigate to Create To-Do Page")}
+          >
+            Create To-Do
+          </button>
+        </Link>
+        <Link
+          to="/update"
           className="px-6 py-3 bg-purple-500 text-white rounded-lg text-lg hover:bg-purple-600"
-          onClick={() => console.log('Navigate to Update To-Do Page')}
         >
-          Update To-Do
-        </button>
+          <button
+            className="px-6 py-3 bg-purple-500 text-white rounded-lg text-lg hover:bg-purple-600"
+            onClick={() => console.log("Navigate to Update To-Do Page")}
+          >
+            Update To-Do
+          </button>
+        </Link>
       </div>
     </div>
   );

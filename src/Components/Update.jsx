@@ -1,18 +1,28 @@
-// CreateTodoPage.jsx
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// UpdateTodoPage.jsx
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const CreateTodoPage = () => {
+const UpdateTodoPage = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  const task = location.state?.task;
+
+  useEffect(() => {
+    if (task) {
+      setTitle(task.title);
+      setDescription(task.description);
+    }
+  }, [task]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title && description) {
-      console.log('New Task:', { title, description });
-      // You can integrate API calls here to save the task in a database
-      // After successful creation, redirect to the main page or another page
+      console.log('Updated Task:', { title, description });
+      // Here you can integrate API calls to update the task in the database
+      // After successful update, redirect to the main page or another page
       navigate('/');
     } else {
       alert('Please fill out both the title and description.');
@@ -21,7 +31,7 @@ const CreateTodoPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 p-8">
-      <h1 className="text-3xl font-bold text-center text-white mb-8">Create New To-Do</h1>
+      <h1 className="text-3xl font-bold text-center text-white mb-8">Update To-Do</h1>
       <div className="max-w-md mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -52,7 +62,7 @@ const CreateTodoPage = () => {
               type="submit"
               className="px-6 py-3 bg-green-600 text-white rounded-lg text-lg hover:bg-green-700"
             >
-              Create Task
+              Update Task
             </button>
             <button
               type="button"
@@ -68,4 +78,4 @@ const CreateTodoPage = () => {
   );
 };
 
-export default CreateTodoPage;
+export default UpdateTodoPage;
