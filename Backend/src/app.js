@@ -4,10 +4,9 @@ import cors from 'cors';
 const app = express();
 app.use(cors());
 
-// Define a simple route
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-});
+import userRouter from './routes/user.route.js';
+
+app.use('/user', userRouter);
 
 
 export { app }
