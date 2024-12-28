@@ -1,4 +1,3 @@
-// CreateTodoPage.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,30 +19,30 @@ const CreateTodoPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 p-8">
-      <h1 className="text-3xl font-bold text-center text-white mb-8">Create New To-Do</h1>
-      <div className="max-w-md mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="title" className="text-white text-lg font-semibold">Title</label>
+    <div className="min-h-screen bg-gray-900 p-6">
+      <h1 className="text-3xl font-bold text-white mb-8 text-center">Create New To-Do</h1>
+      <div className="max-w-md mx-auto bg-gray-800 rounded-lg shadow-lg p-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label htmlFor="title" className="block text-white text-lg font-medium mb-2">Title</label>
             <input
               id="title"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full p-3 mt-2 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter task title"
+              className="w-full px-4 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
-          <div className="mb-4">
-            <label htmlFor="description" className="text-white text-lg font-semibold">Description</label>
+          <div>
+            <label htmlFor="description" className="block text-white text-lg font-medium mb-2">Description</label>
             <textarea
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full p-3 mt-2 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter task description"
+              className="w-full px-4 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 h-32 resize-none"
             ></textarea>
           </div>
 
