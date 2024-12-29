@@ -28,12 +28,16 @@ const CreateTodoPage = () => {
 
         const data = await response.json(); // Parse JSON response
         console.log("Task created successfully:", data);
+        alert("Task created successfully!");
+
+        setTitle("");
+        setDescription("");
       } 
       catch (error) {
         console.error("Failed to create task:", error.message);
+        alert("Failed to create task. Please try again.");
       }
 
-      navigate("/");
     }
      else {
       alert("Please fill out both the title and description.");

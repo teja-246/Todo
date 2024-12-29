@@ -23,8 +23,19 @@ const UpdateTodoPage = () => {
       console.log('Updated Task:', { title, description });
       // Here you can integrate API calls to update the task in the database
       // After successful update, redirect to the main page or another page
+      const response = fetch(`http://localhost:8000/user/update/${task._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title, description }),
+      });
+      const data = response.json();
+      console.log('Task updated successfully:', data);
+      
       navigate('/');
-    } else {
+    } 
+    else {
       alert('Please fill out both the title and description.');
     }
   };
