@@ -1,30 +1,59 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CreateTodoPage = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const taskData = { title, description };
     if (title && description) {
-      console.log('New Task:', { title, description });
+      console.log("New Task:", { title, description });
       // You can integrate API calls here to save the task in a database
       // After successful creation, redirect to the main page or another page
-      navigate('/');
-    } else {
-      alert('Please fill out both the title and description.');
+      try {
+        const response = await fetch("http://localhost:8000/user/create", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(taskData),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+
+        const data = await response.json(); // Parse JSON response
+        console.log("Task created successfully:", data);
+      } 
+      catch (error) {
+        console.error("Failed to create task:", error.message);
+      }
+
+      navigate("/");
+    }
+     else {
+      alert("Please fill out both the title and description.");
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-900 p-6">
-      <h1 className="text-3xl font-bold text-white mb-8 text-center">Create New To-Do</h1>
+      <h1 className="text-3xl font-bold text-white mb-8 text-center">
+        Create New To-Do
+      </h1>
       <div className="max-w-md mx-auto bg-gray-800 rounded-lg shadow-lg p-6">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="title" className="block text-white text-lg font-medium mb-2">Title</label>
+            <label
+              htmlFor="title"
+              className="block text-white text-lg font-medium mb-2"
+            >
+              Title
+            </label>
             <input
               id="title"
               type="text"
@@ -36,7 +65,12 @@ const CreateTodoPage = () => {
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-white text-lg font-medium mb-2">Description</label>
+            <label
+              htmlFor="description"
+              className="block text-white text-lg font-medium mb-2"
+            >
+              Description
+            </label>
             <textarea
               id="description"
               value={description}
@@ -55,7 +89,7 @@ const CreateTodoPage = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate('/')}
+              onClick={() => navigate("/")}
               className="px-6 py-3 bg-red-600 text-white rounded-lg text-lg hover:bg-red-700"
             >
               Cancel
