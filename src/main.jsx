@@ -16,9 +16,9 @@ const router = createBrowserRouter([
     element: <CreateTodoPage />,
   },
   {
-    path: "/update",
+    path: "/update/:id",
     element: <UpdateTodoPage />
-  }
+  },
 ]);
 
 createRoot(document.getElementById('root')).render(

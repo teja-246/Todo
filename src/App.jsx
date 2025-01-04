@@ -8,7 +8,7 @@ const MainPage = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch('http://localhost:8000/user/getAllTasks');
+        const response = await fetch("http://localhost:8000/user/getAllTasks");
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
@@ -21,18 +21,14 @@ const MainPage = () => {
     fetchTasks();
   }, []);
 
-  const handleUpdate = (id) => {
-    console.log(`Update task with id: ${id}`);
-  };
-
   const handleView = (id) => {
     console.log(`View task with id: ${id}`);
   };
 
-  const handleDelete = async(id) => {
+  const handleDelete = async (id) => {
     try {
       const response = await fetch(`http://localhost:8000/user/delete/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
 
       if (!response.ok) {
@@ -43,8 +39,7 @@ const MainPage = () => {
       console.log(result.message);
 
       setTasks((prevTasks) => prevTasks.filter((task) => task._id !== id));
-    } 
-    catch (err) {
+    } catch (err) {
       console.error(err.message);
       setError(err.message);
     }
@@ -64,12 +59,19 @@ const MainPage = () => {
             <h2 className="text-xl font-semibold text-white">{task.title}</h2>
             <p className="text-white mb-4">{task.description}</p>
             <div className="flex justify-end gap-4">
-                <button
-                  className="px-6 py-3 bg-yellow-500 text-white rounded-lg text-lg hover:bg-blue-700 transition-colors"
-                  onClick={() => handleUpdate(task._id)}
-                >
+              <Link
+                to={`/update/${task._id}`}
+                state={{
+                  id: task._id,
+                  title: task.title,
+                  description: task.description,
+                }}
+                className="text-white py-1 px-3 rounded mt-2 inline-block"
+              >
+                <button className="px-6 py-3 bg-yellow-500 text-white rounded-lg text-lg hover:bg-blue-700 transition-colors">
                   Update To-Do
                 </button>
+              </Link>
               <button
                 className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
                 onClick={() => handleView(task._id)}
