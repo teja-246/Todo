@@ -9,6 +9,7 @@ dotenv.config({path: './.env'});
         const connectionInstance = await mongoose.connect(process.env.MONGO_URI)
 
         app.listen(process.env.PORT || 8000, ()=>{
+            console.log('Server is running on port ${process.env.PORT || 8000}')
         })
     }
     catch (error) {
