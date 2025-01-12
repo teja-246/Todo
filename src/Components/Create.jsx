@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 const CreateTodoPage = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -14,7 +15,7 @@ const CreateTodoPage = () => {
       // You can integrate API calls here to save the task in a database
       // After successful creation, redirect to the main page or another page
       try {
-        const response = await fetch("http://localhost:8000/user/create", {
+        const response = await fetch(`${API_URL}/user/create`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

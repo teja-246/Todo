@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 const UpdateTodo = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const UpdateTodo = () => {
     console.log("Updated Todo:", { title, description });
     // Perform any update logic here (e.g., API call)
     const response = fetch(
-      `http://localhost:8000/user/update/${location.state.id}`,
+      `${API_URL}/user/update/${location.state.id}`,
       {
         method: "PUT",
         headers: {

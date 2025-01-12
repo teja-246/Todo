@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 const MainPage = () => {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState(null);
@@ -8,7 +9,7 @@ const MainPage = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch("http://localhost:8000/user/getAllTasks");
+        const response = await fetch(`${API_URL}/user/getAllTasks`);
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
@@ -27,7 +28,7 @@ const MainPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8000/user/delete/${id}`, {
+      const response = await fetch(`${API_URL}/user/delete/${id}`, {
         method: "DELETE",
       });
 
