@@ -1,10 +1,10 @@
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}', './index.html'],
+  content: [
+    './index.html', // Include your HTML file(s)
+    './src/**/*.{js,jsx,ts,tsx}', // Include your React components
+  ],
   theme: {
     extend: {},
   },
-  variants: {
-    extend: {},
-  },
   plugins: [],
-}
+};
