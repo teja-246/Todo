@@ -97,7 +97,7 @@ const CreateTodoPage = () => {
               onClick={() => navigate("/")}
               className="px-6 py-3 bg-red-600 text-white rounded-lg text-lg hover:bg-red-700"
             >
-              Cancel
+              Go back
             </button>
           </div>
         </form>
